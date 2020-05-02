@@ -1,0 +1,11 @@
+{
+  "name": "KartRider",
+  "version": "0.0.1",
+  "description": "KartRider library interacting with Nexon API",
+  "main": "index.js",
+  "author": "MoartMedia",
+  "license": "MIT",
+  "dependencies": {
+    "got": "^11.0.2"
+  }
+}
