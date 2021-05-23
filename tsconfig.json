@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "rootDir": "./",
+    "allowJs": true,
+    "moduleResolution": "node",
+    "module": "CommonJS",
+    "removeComments": false,
+    "outDir": "dist",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+  },
+  "include": ["./src/**/*.ts"],
+  "exclude": ["node_modules"]
+}
