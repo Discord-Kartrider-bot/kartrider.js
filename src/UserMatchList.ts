@@ -1,31 +1,34 @@
 
 import Match from './Match'; 
-import { UserBasicInfo } from './KartClient'
+import type { UserBasicInfo } from './KartClient'
+import type { rawMatchTypeMatches, rawUserMatchInfo, rawUserMatchList } from '../typings/raw'
 
 export default class UserMatchList{
     public user: UserBasicInfo;
-    public MatchList: Match[];
-    public limit: number | null;
-    public offset: number | null;
-    constructor(userInfo:UserBasicInfo, data, {limit,offset}){
+    public matchList: Match[];
+    public limit: number | undefined;
+    public offset: number | undefined;
+    constructor(userInfo:UserBasicInfo, data: rawUserMatchList, page?:{limit:number,offset:number}){
         this.user = userInfo;
-        this.MatchList = resolveMatchList(data.matches);
-        this.limit = limit;
-        this.offset = offset;
+        this.matchList = resolveMatchList(data.matches);
+        this.limit = page?.limit;
+        this.offset = page?.offset;
     }
     
 }
 
-function _MargeTypefromMatchObject(data){
-    let result = [];
+function _MargeTypefromMatchObject(data: rawMatchTypeMatches[]){
+    let result: rawUserMatchInfo[] = [];
     data.forEach(e => result = result.concat(e.matches));
     return result;
 }
-function _SortDatefromMatchObject(data){
+
+function _SortDatefromMatchList(data: rawUserMatchInfo[]){
     return data.sort((a,b)=>Date.parse(b.endTime)-Date.parse(a.endTime));
 }
-function resolveMatchList(raw): Match[]{
+
+function resolveMatchList(raw: rawMatchTypeMatches[]){
     const marge = _MargeTypefromMatchObject(raw);
-    const sort = _SortDatefromMatchObject(marge);
+    const sort = _SortDatefromMatchList(marge);
     return sort.map(MatchData => new Match(MatchData));
 }
