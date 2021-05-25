@@ -10,7 +10,7 @@
     "resolveJsonModule": true,
     "importsNotUsedAsValues": "error",
     "noFallthroughCasesInSwitch": true,
-    //"noUnusedParameters": true,
+    "noUnusedParameters": true,
     "noImplicitReturns": true,
     "noUnusedLocals": true,
     "sourceMap": true,
@@ -18,7 +18,8 @@
     "target": "ES2019",
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-  // "strict": true
+    "strict": true
   },
-  "include": ["src","test", "typings/*.ts"]
+  "include": ["src", "typings/*.ts"],
+  "exclude": ["test"]
 }
