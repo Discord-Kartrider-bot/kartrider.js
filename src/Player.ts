@@ -1,15 +1,25 @@
+import type {rawPlayer} from '../typings/raw'
 export default class Player{
-public id: string | null;
-public name: string | null;
-public _characterID: string | null;
-public _kartID: string | null;
-public _petID: string | null;
-public _flyingPetID: string | null;
-public matchTime: number | null;
-public matchWin: string | null;
-public _lisenceID: string | null;
-public matchRetired: string | null;
-constructor(data){
-    
+public id: string;
+public name: string;
+public _characterID: string;
+public _kartID: string;
+public _petID: string;
+public _flyingPetID: string;
+public matchTime: string;
+public matchWin: string;
+public _lisenceID: string;
+public matchRetired: string;
+constructor(data: rawPlayer){
+    this.id = data.accountNo;
+    this.name = data.characterName;
+    this._characterID = data.character;
+    this._kartID = data.kart;
+    this._petID = data.pet;
+    this._flyingPetID = data.flyingPet;
+    this.matchTime = data.matchTime;
+    this.matchWin = data.matchWin;
+    this._lisenceID = data.rankinggrade2;
+    this.matchRetired = data.matchRetired;
 }
 }
