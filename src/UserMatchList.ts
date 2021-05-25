@@ -1,11 +1,11 @@
 
-import Match from './Match'; 
+import UserMatchInfo from './UserMatchInfo'; 
 import type { UserBasicInfo } from './KartClient'
 import type { rawMatchTypeMatches, rawUserMatchInfo, rawUserMatchList } from '../typings/raw'
 
 export default class UserMatchList{
     public user: UserBasicInfo;
-    public matchList: Match[];
+    public matchList: UserMatchInfo[];
     public limit: number | undefined;
     public offset: number | undefined;
     constructor(userInfo:UserBasicInfo, data: rawUserMatchList, page?:{limit:number,offset:number}){
@@ -30,5 +30,5 @@ function _SortDatefromMatchList(data: rawUserMatchInfo[]){
 function resolveMatchList(raw: rawMatchTypeMatches[]){
     const marge = _MargeTypefromMatchObject(raw);
     const sort = _SortDatefromMatchList(marge);
-    return sort.map(MatchData => new Match(MatchData));
+    return sort.map(MatchData => new UserMatchInfo(MatchData));
 }

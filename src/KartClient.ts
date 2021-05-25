@@ -1,8 +1,8 @@
 import got, { Got } from 'got'
 import UserMatchList from './UserMatchList';
 import { StatusCodeErrorHandler } from './NexonError';
-import Match from './Match';
-import type { rawUserMatchList } from '../typings/raw'
+import type {rawMatchDetail, rawUserMatchList } from '../typings/raw'
+import MatchDetail from './MatchDetail';
 
 export interface UserBasicInfo{
     accessId: string;
@@ -46,10 +46,11 @@ export class KartClient {
         return new UserMatchList(info,data,{limit,offset});
     }
 
-    async getMatch(MatchID:string) : Promise<Match | null>{
+    async getMatch(MatchID:string) : Promise<MatchDetail | null>{
         const res = await this.api.get(`matches/${MatchID}`);
         if(!res) return null;
-        return new Match(res.body);
+        const data = res.body as unknown as rawMatchDetail;
+        return new MatchDetail(data);
     }
 
    /* async getAllMatchList(limit){

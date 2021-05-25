@@ -8,7 +8,7 @@ export interface rawMatchTypeMatches{
     matches: rawUserMatchInfo[]
 }
 
-interface rawMatch{
+export interface rawMatch{
     matchId: string;
     matchType: string;
     startTime: string;
