@@ -9,6 +9,9 @@ export interface UserBasicInfo{
     name: string;
     level: number;
 }
+
+const isOK = (body:unknown)=> body as any ['status'] !== 404
+
 export class KartClient {
     private _token: string;
     public api: Got;
@@ -25,27 +28,27 @@ export class KartClient {
         })
         }
     
-    async getUserBasicInfoByName(name:string) : Promise<UserBasicInfo | null>{
+    async getUserBasicInfoByName(name:string){
         const encodeName = encodeURIComponent(name);
         const json = await this.api.get(`users/nickname/${encodeName}`).then(res=>res.body as unknown);
-        return (json['status'] !== 404) ? json as UserBasicInfo : null;
+        return (isOK(json)) ? json as UserBasicInfo : null;
     }
 
-    async getUserBasicInfoByID(id:string) : Promise<UserBasicInfo | null>{
+    async getUserBasicInfoByID(id:string){
         const json = await this.api.get(`users/${id}`).then(res=>res.body as unknown);
-        return (json['status'] !== 404) ? json as UserBasicInfo : null;
+        return (isOK(json)) ? json as UserBasicInfo : null;
     }
 
-    async getUserMatchList(info:UserBasicInfo,limit:number=20,offset:number=0) : Promise<UserMatchList | null>{
+    async getUserMatchList(info:UserBasicInfo,limit:number=20,offset:number=0){
         const json = await this.api.get(`users/${info.accessId}/matches`).then(res=>res.body as unknown);
-        if (json['status'] !== 404) return null;
+        if (!isOK(json)) return null;
         const data = json as rawUserMatchList;
         return new UserMatchList(info,data,{limit,offset});
     }
 
-    async getMatch(MatchID:string) : Promise<MatchDetail | null>{
-        const json = await this.api.get(`matches/${MatchID}`).then(res=>res.body as unknown);;
-        if (json['status'] !== 404) return null;
+    async getMatch(MatchID:string){
+        const json = await this.api.get(`matches/${MatchID}`).then(res=>res.body as unknown);
+        if (!isOK(json)) return null;
         const data = json as rawMatchDetail;
         return new MatchDetail(data);
     }
