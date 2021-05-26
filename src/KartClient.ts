@@ -9,7 +9,6 @@ export interface UserBasicInfo{
     name: string;
     level: number;
 }
-
 export class KartClient {
     private _token: string;
     public api: Got;
@@ -27,29 +26,27 @@ export class KartClient {
         }
     
     async getUserBasicInfoByName(name:string) : Promise<UserBasicInfo | null>{
-        const _name = encodeURIComponent(name);
-        const res = await this.api.get(`users/nickname/${_name}`)
-        if(!res) return null;
-        return res.body as unknown as UserBasicInfo;
+        const encodeName = encodeURIComponent(name);
+        const json = await this.api.get(`users/nickname/${encodeName}`).then(res=>res.body as unknown);
+        return (json['status'] !== 404) ? json as UserBasicInfo : null;
     }
 
     async getUserBasicInfoByID(id:string) : Promise<UserBasicInfo | null>{
-        const res = await this.api.get(`users/${id}`);
-        if(!res) return null;
-        return res.body as unknown as UserBasicInfo;
+        const json = await this.api.get(`users/${id}`).then(res=>res.body as unknown);
+        return (json['status'] !== 404) ? json as UserBasicInfo : null;
     }
 
     async getUserMatchList(info:UserBasicInfo,limit:number=20,offset:number=0) : Promise<UserMatchList | null>{
-        const res = await this.api.get(`users/${info.accessId}/matches`);
-        if(!res) return null;
-        const data = res.body as unknown as rawUserMatchList;
+        const json = await this.api.get(`users/${info.accessId}/matches`).then(res=>res.body as unknown);
+        if (json['status'] !== 404) return null;
+        const data = json as rawUserMatchList;
         return new UserMatchList(info,data,{limit,offset});
     }
 
     async getMatch(MatchID:string) : Promise<MatchDetail | null>{
-        const res = await this.api.get(`matches/${MatchID}`);
-        if(!res) return null;
-        const data = res.body as unknown as rawMatchDetail;
+        const json = await this.api.get(`matches/${MatchID}`).then(res=>res.body as unknown);;
+        if (json['status'] !== 404) return null;
+        const data = json as rawMatchDetail;
         return new MatchDetail(data);
     }
 
