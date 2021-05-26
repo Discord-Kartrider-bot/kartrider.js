@@ -31,12 +31,12 @@ export class KartClient {
     async getUserBasicInfoByName(name:string){
         const encodeName = encodeURIComponent(name);
         const json = await this.api.get(`users/nickname/${encodeName}`).then(res=>res.body as unknown);
-        return (isOK(json)) ? json as UserBasicInfo : null;
+        return isOK(json) ? json as UserBasicInfo : null;
     }
 
     async getUserBasicInfoByID(id:string){
         const json = await this.api.get(`users/${id}`).then(res=>res.body as unknown);
-        return (isOK(json)) ? json as UserBasicInfo : null;
+        return isOK(json) ? json as UserBasicInfo : null;
     }
 
     async getUserMatchList(info:UserBasicInfo,limit:number=20,offset:number=0){
