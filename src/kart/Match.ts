@@ -1,4 +1,4 @@
-import type { rawMatch } from '../typings/raw'
+import type { rawMatch } from '../../typings/raw'
 export default class Match{
     public id: string;
     public _channelNameID: string;
@@ -24,7 +24,7 @@ export default class Match{
         else if(this._channelNameID.includes("Fastest2Enchant")) return "가장빠름";
         else if(this._channelNameID.includes("Fastest")) return "매우빠름";
         else if(this._channelNameID.includes("Fast")) return "빠름";
-        return null;
+        return "보통";
     }
 
     get playTime(){

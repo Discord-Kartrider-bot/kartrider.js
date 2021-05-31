@@ -12,7 +12,7 @@ console.log('getUserBasicInfoByID(): Check Insert Wrong ID:',_.isNull(wrongInfoB
 
 const userInfo = await kartClient.getUserBasicInfoByName('코로나행열차');
 console.log('getUserBasicInfoByName(): Check Real Nickname:',userInfo);
-
+if(!userInfo) return console.log('userInfo is null!');
 const userID = userInfo.accessId
 const userInfoByID = await kartClient.getUserBasicInfoByID(userID);
 console.log('Reverse search is Same?:',_.isEqual(userInfo,userInfoByID))

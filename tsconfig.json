@@ -20,6 +20,5 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true
   },
-  "include": ["src", "typings/*.ts"],
-  "exclude": ["test"]
+  "include": ["test","src", "typings/*.ts"],
 }
