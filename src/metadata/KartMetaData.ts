@@ -29,10 +29,7 @@ constructor() {
 
 static async init(folderPath?:string){
 const kartMetaData = new KartMetaData();
-if(!folderPath){
-    console.warn('[KartMetaData] folderPath not given. Fetching MetaData..')
-    await kartMetaData.fetch();
-}else{
+if(folderPath){
     kartMetaData.path = folderPath;
     const jsonFiles = readdirSync(folderPath)
         .filter(file =>file.endsWith('.json'))
@@ -43,9 +40,10 @@ if(!folderPath){
         await kartMetaData.fetch();
         console.log('[KartMetaData] save json from Fetch MetaData..')
         await kartMetaData.save();
-    }else{
-    await Promise.all(jsonFiles);
-    }
+    }else await Promise.all(jsonFiles);
+}else{
+    console.warn('[KartMetaData] folderPath not given. Fetching MetaData..')
+    await kartMetaData.fetch();
 }
 return kartMetaData;
 }
@@ -91,11 +89,11 @@ async appendJSONStream(stream:StreamMetaData) {
 save(){
     if(!this.path) new Error(`KartMetadata Folder is undefined`);
     const names = Object.keys(this.data);
-    const promiseQueue = names.map(name=>new Promise<void>((resolve,_reject) =>{
+    const promiseQueue = names.map(name=>new Promise<void>((resolve,reject) =>{
         const map = this.data[name];
         const array = []
         for (let [key, value] of map) array.push({id:key,name:value})
-        writeFile(path.join(this.path as string,`${name}.json`),JSON.stringify(array),()=>resolve())
+        writeFile(path.join(this.path as string,`${name}.json`),JSON.stringify(array),(err)=>err ? reject(err) : resolve())
     }))
     return Promise.all(promiseQueue);
 }
