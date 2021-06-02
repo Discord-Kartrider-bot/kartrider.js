@@ -1,9 +1,9 @@
 import got, { Got } from 'got'
-import UserMatchList from '@/kart/UserMatchList';
-import { StatusCodeErrorHandler } from '@/kart/NexonError';
-import type {rawMatchDetail, rawUserMatchList } from '@typings/raw'
-import MatchDetail from '@/kart/MatchDetail';
-import type {KartMetaData} from '@/metadata/KartMetaData';
+import UserMatchList from './UserMatchList';
+import { StatusCodeErrorHandler } from './NexonError';
+import type {rawMatchDetail, rawUserMatchList } from '../../typings/raw'
+import MatchDetail from './MatchDetail';
+import type {KartMetaData} from '../';
 
 export interface UserBasicInfo{
     accessId: string;

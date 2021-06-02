@@ -18,12 +18,7 @@
     "target": "ES2019",
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "strict": true,
-    "baseUrl": ".",
-    "paths":{
-      "@/*": ["src/*"],
-      "@typings/*": ["typings/*"]
-    }
+    "strict": true
   },
   "include": ["test","src", "typings/*.ts"],
 }

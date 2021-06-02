@@ -1,7 +1,7 @@
-import type { KartMetaData } from '@/metadata/KartMetaData';
-import type { rawUserMatchInfo } from '@typings/raw'
-import Match from '@/kart/Match';
-import Player from '@/kart/Player';
+import type { KartMetaData } from '../';
+import type { rawUserMatchInfo } from '../../typings/raw'
+import Match from './Match';
+import Player from './Player';
 export default class UserMatchInfo extends Match{
     public player: Player;
     constructor(data: rawUserMatchInfo,kartMetaData?:KartMetaData){
