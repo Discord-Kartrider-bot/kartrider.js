@@ -4,6 +4,7 @@ import {parser as JSONParse}  from 'stream-json/Parser';
 import {streamArray as JSONArrayStream}  from 'stream-json/streamers/StreamArray';
 import {createReadStream, readdirSync, writeFile} from 'fs';
 import type { Readable } from 'stream';
+import type {MetaDataInfo} from '../../typings/'
 import * as path from 'path';
 
 const MetaDataDownloadURL = "https://static.api.nexon.co.kr/kart/latest/metadata.zip"
@@ -59,8 +60,9 @@ static getRecentDataInfo(){
 }
 
 getMetaData(id:MetadataID){
+    if(!this.isExist(id)) return {id:id.hash} as MetaDataInfo
     const name = this.data[id.type].get(id.hash);
-    return {id:id.hash,name}
+    return {id:id.hash,name} as MetaDataInfo
 }
 
 isExist(id :MetadataID){

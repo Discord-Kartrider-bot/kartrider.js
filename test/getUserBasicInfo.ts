@@ -2,8 +2,9 @@ import {KartClient} from '../src'
 import {token} from './auth.json'
 import * as _ from 'lodash';
 
-const kartClient = new KartClient(token);
+
 (async ()=>{
+const kartClient = new KartClient(token);
 const wrongInfo =await kartClient.getUserBasicInfoByName('WEEEEEEEEE!');
 console.log('getUserBasicInfoByName(): Check Insert Wrong Nickname:',_.isNull(wrongInfo));
 

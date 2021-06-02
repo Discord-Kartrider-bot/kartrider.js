@@ -7,8 +7,8 @@ import type {KartMetaData} from '../';
 
 export interface UserBasicInfo{
     accessId: string;
-    name: string;
-    level: number;
+    name?: string;
+    level?: number;
 }
 
 const isOK = (body:unknown)=> body as any ['status'] !== 404
@@ -46,14 +46,14 @@ export class KartClient {
         const json = await this.api.get(`users/${info.accessId}/matches`).then(res=>res.body as unknown);
         if (!isOK(json)) return null;
         const data = json as rawUserMatchList;
-        return new UserMatchList(info,data,{limit,offset});
+        return new UserMatchList(info,data,{limit,offset},this.metadata);
     }
 
     async getMatch(MatchID:string){
         const json = await this.api.get(`matches/${MatchID}`).then(res=>res.body as unknown);
         if (!isOK(json)) return null;
         const data = json as rawMatchDetail;
-        return new MatchDetail(data);
+        return new MatchDetail(data,this.metadata);
     }
 
    /* async getAllMatchList(limit){
