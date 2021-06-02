@@ -3,6 +3,7 @@ import UserMatchList from './UserMatchList';
 import { StatusCodeErrorHandler } from './NexonError';
 import type {rawMatchDetail, rawUserMatchList } from '../../typings/raw'
 import MatchDetail from './MatchDetail';
+import type {KartMetaData} from '../';
 
 export interface UserBasicInfo{
     accessId: string;
@@ -15,8 +16,9 @@ const isOK = (body:unknown)=> body as any ['status'] !== 404
 export class KartClient {
     private _token: string;
     public api: Got;
+    public metadata: KartMetaData | undefined;
     
-    constructor(token:string){
+    constructor(token:string,kartMetaData?:KartMetaData){
         this._token = token;
         this.api = got.extend({
             prefixUrl: 'https://api.nexon.co.kr/kart/v1.0',
@@ -26,6 +28,7 @@ export class KartClient {
             responseType: 'json',
             handlers:[StatusCodeErrorHandler]
         })
+        this.metadata = kartMetaData;
         }
     
     async getUserBasicInfoByName(name:string){
