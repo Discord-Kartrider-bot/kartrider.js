@@ -12,11 +12,6 @@
     "nexon.com",
     "kartrider"
   ],
-  "files": [
-    "lib",
-    "index.js",
-    "LICENSE"
-  ],
   "dependencies": {
     "got": "^11.0.2",
     "stream-json": "^1.7.1",
