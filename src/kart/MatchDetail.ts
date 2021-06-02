@@ -1,5 +1,5 @@
-import type { KartMetaData } from '../';
-import type { rawMatchDetail } from '../../typings/raw'
+import type { KartMetaData } from '@/metadata/KartMetaData';
+import type { rawMatchDetail } from '@typings/raw'
 import Match from './Match';
 export default class MatchDetail extends Match{
     private _playTime: number;

@@ -4,7 +4,7 @@ import {parser as JSONParse}  from 'stream-json/Parser';
 import {streamArray as JSONArrayStream}  from 'stream-json/streamers/StreamArray';
 import {createReadStream, readdirSync, writeFile} from 'fs';
 import type { Readable } from 'stream';
-import type {MetaDataInfo} from '../../typings/'
+import type {MetaDataInfo} from '@typings/index'
 import * as path from 'path';
 
 const MetaDataDownloadURL = "https://static.api.nexon.co.kr/kart/latest/metadata.zip"

@@ -1,8 +1,8 @@
 
-import UserMatchInfo from './UserMatchInfo'; 
-import type { UserBasicInfo } from './KartClient'
-import type { rawMatchTypeMatches, rawUserMatchInfo, rawUserMatchList } from '../../typings/raw'
-import type { KartMetaData } from '../';
+import UserMatchInfo from '@/kart/UserMatchInfo'; 
+import type { UserBasicInfo } from '@/kart/KartClient'
+import type { rawMatchTypeMatches, rawUserMatchInfo, rawUserMatchList } from '@typings/raw'
+import type { KartMetaData } from '@/metadata/KartMetaData';
 
 export default class UserMatchList{
     public user: UserBasicInfo;
