@@ -110,6 +110,6 @@ dist
 # Local History for Visual Studio Code
 .history/
 
-*_old
 auth.json
-sampleData/
+reference/
+metadata/
