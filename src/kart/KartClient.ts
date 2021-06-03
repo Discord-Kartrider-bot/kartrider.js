@@ -11,7 +11,7 @@ export interface UserBasicInfo{
     level?: number;
 }
 
-const isOK = (body:unknown)=> body as any ['status'] !== 404
+const isOK = (body:any)=> body.status !== 404
 
 export class KartClient {
     private _token: string;

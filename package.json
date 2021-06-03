@@ -12,11 +12,6 @@
     "nexon.com",
     "kartrider"
   ],
-  "files": [
-    "lib",
-    "index.js",
-    "LICENSE"
-  ],
   "dependencies": {
     "got": "^11.0.2",
     "stream-json": "^1.7.1",
@@ -29,12 +24,18 @@
     "type": "git",
     "url": "https://github.com/Discord-Kartrider-bot/kartrider.js.git"
   },
+  "scripts": {
+    "test": "yarn mocha test/**/*.ts"
+  },
   "devDependencies": {
+    "@types/chai": "^4.2.18",
     "@types/lodash": "^4.14.170",
+    "@types/mocha": "^8.2.2",
     "@types/node": "^15.6.0",
     "@types/stream-json": "^1.7.0",
     "@types/unzipper": "^0.10.3",
-    "lodash": "^4.17.21",
+    "chai": "^4.3.4",
+    "mocha": "^8.4.0",
     "ts-node": "^9.1.1",
     "typescript": "^4.2.4"
   }

@@ -40,7 +40,7 @@ if(folderPath){
         console.warn('[KartMetaData] json files not found. Fetching MetaData..')
         await kartMetaData.fetch();
         console.log('[KartMetaData] save json from Fetch MetaData..')
-        await kartMetaData.save();
+        await kartMetaData.saveFile();
     }else await Promise.all(jsonFiles);
 }else{
     console.warn('[KartMetaData] folderPath not given. Fetching MetaData..')
@@ -68,6 +68,7 @@ getMetaData(id:MetadataID){
 isExist(id :MetadataID){
    return Boolean(this.data[id.type] && this.data[id.type].has(id.hash));
 }
+
 fetch(){
 return got.stream(MetaDataDownloadURL).pipe(parseZip())
     .on('entry', async (entry)=> {
@@ -88,7 +89,8 @@ async appendJSONStream(stream:StreamMetaData) {
     return _makeMapFromJSONFileStream(stream.stream)
            .then(map => this._updateDataMap(stream.type,map));
 }
-save(){
+
+saveFile(){
     if(!this.path) new Error(`KartMetadata Folder is undefined`);
     const names = Object.keys(this.data);
     const promiseQueue = names.map(name=>new Promise<void>((resolve,reject) =>{
