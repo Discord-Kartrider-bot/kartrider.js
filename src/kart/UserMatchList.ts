@@ -10,6 +10,7 @@ export default class UserMatchList{
     public offset: number | undefined | null;
     constructor(userInfo:UserBasicInfo, data: rawUserMatchList, page?:{limit:number,offset:number},kartMetaData?:KartMetaData){
         this.user = userInfo;
+        if(!this.user.name) this.user.name = data.nickname;
         this.matchList = resolveMatchList(data.matches,kartMetaData);
         this.limit = page?.limit;
         this.offset = page?.offset;
