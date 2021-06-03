@@ -37,7 +37,8 @@ export class KartClient {
     }
 
     async getUserMatchList(info:UserBasicInfo,limit:number=20,offset:number=0){
-        const json = await this.api.get(`users/${info.accessId}/matches`).then(res=>res.body as unknown);
+        const searchParams = new URLSearchParams([['limit',limit.toString()],["offset",offset.toString()]])
+        const json = await this.api.get(`users/${info.accessId}/matches`,{searchParams}).then(res=>res.body as unknown);
         if (!isOK(json)) return null;
         const data = json as rawUserMatchList;
         return new UserMatchList(info,data,{limit,offset},this.metadata);
