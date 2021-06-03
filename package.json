@@ -1,8 +1,9 @@
 {
   "name": "kartrider.js",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "KartRider library interacting with Nexon API",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "author": "MoartMedia <u.hello@kakao.com>",
   "license": "MIT",
   "keywords": [
@@ -28,6 +29,7 @@
     "test": "yarn mocha test/**/*.ts"
   },
   "devDependencies": {
+    "@tsconfig/recommended": "^1.0.1",
     "@types/chai": "^4.2.18",
     "@types/lodash": "^4.14.170",
     "@types/mocha": "^8.2.2",
