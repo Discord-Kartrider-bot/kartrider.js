@@ -24,7 +24,7 @@ export interface StreamMetaData{
         stream: Readable
     }
 export interface rawUserMatchList{
-        nickname: string;
+        nickName: string;
         matches: rawMatchTypeMatches[];
     }
     
