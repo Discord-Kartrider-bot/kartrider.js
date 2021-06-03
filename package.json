@@ -4,7 +4,7 @@
   "description": "KartRider library interacting with Nexon API",
   "main": "index.js",
   "author": "MoartMedia <u.hello@kakao.com>",
-  "license": "Apache-2.0",
+  "license": "MIT",
   "keywords": [
     "tmi",
     "nexon",
@@ -18,20 +18,24 @@
     "LICENSE"
   ],
   "dependencies": {
-    "got": "^11.0.2"
+    "got": "^11.0.2",
+    "stream-json": "^1.7.1",
+    "unzipper": "^0.10.11"
   },
   "bugs": {
-    "url": "https://github.com/MoartMedia/kartrider.js/issues"
+    "url": "https://github.com/Discord-Kartrider-bot/kartrider.js/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/MoartMedia/kartrider.js.git"
+    "url": "https://github.com/Discord-Kartrider-bot/kartrider.js.git"
   },
   "devDependencies": {
-    "chai": "^4.2.0",
-    "mocha": "^7.1.2"
-  },
-  "scripts": {
-    "test": "mocha"
+    "@types/lodash": "^4.14.170",
+    "@types/node": "^15.6.0",
+    "@types/stream-json": "^1.7.0",
+    "@types/unzipper": "^0.10.3",
+    "lodash": "^4.17.21",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.4"
   }
 }

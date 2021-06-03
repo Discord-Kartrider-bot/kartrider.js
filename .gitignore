@@ -41,9 +41,6 @@ build/Release
 node_modules/
 jspm_packages/
 
-# TypeScript v1 declaration files
-typings/
-
 # TypeScript cache
 *.tsbuildinfo
 
@@ -112,4 +109,7 @@ dist
 
 # Local History for Visual Studio Code
 .history/
-test/
+
+auth.json
+reference/
+metadataJSON/
