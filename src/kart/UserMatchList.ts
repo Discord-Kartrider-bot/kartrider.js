@@ -1,8 +1,7 @@
 
 import UserMatchInfo from './UserMatchInfo'; 
-import type { UserBasicInfo } from './KartClient'
-import type { rawMatchTypeMatches, rawUserMatchInfo, rawUserMatchList } from '../../typings/raw'
-import type { KartMetaData } from '../';
+import type { UserBasicInfo, rawMatchTypeMatches, rawUserMatchInfo, rawUserMatchList } from '../types'
+import type { KartMetaData } from '../metadata/KartMetaData';
 
 export default class UserMatchList{
     public user: UserBasicInfo;
@@ -14,7 +13,7 @@ export default class UserMatchList{
         this.matchList = resolveMatchList(data.matches,kartMetaData);
         this.limit = page?.limit;
         this.offset = page?.offset;
-    }    
+    }
 }
 
 function _MargeTypefromMatchObject(data: rawMatchTypeMatches[]){

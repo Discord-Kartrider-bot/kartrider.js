@@ -1,5 +1,5 @@
-import type { KartMetaData } from '../';
-import type { rawUserMatchInfo } from '../../typings/raw'
+import type { KartMetaData } from '../metadata/KartMetaData';
+import type { rawUserMatchInfo } from '../types'
 import Match from './Match';
 import Player from './Player';
 export default class UserMatchInfo extends Match{

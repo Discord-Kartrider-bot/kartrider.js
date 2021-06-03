@@ -7,7 +7,7 @@ describe('유저정보 조회', () => {
         kart = new KartClient(token)
     })
     it('올바른 닉네임으로 정보 조회',async ()=>{
-       const userBasicInfo = await kart.getUserBasicInfoByName('우도환닮은꼴')
+       const userBasicInfo = await kart.getUserBasicInfoByName('MochaTest')
        assert.isNotNull(userBasicInfo);
        assert.equal(userBasicInfo?.accessId,'688112936')
        assert.hasAllKeys(userBasicInfo,['accessId','level','name'])
@@ -17,9 +17,9 @@ describe('유저정보 조회', () => {
         assert.isNull(userBasicInfo);
      })
      it('올바른 id로 정보를 조회',async ()=>{
-        const userBasicInfo = await kart.getUserBasicInfoByID('2047251563')
+        const userBasicInfo = await kart.getUserBasicInfoByID('688112936')
         assert.isNotNull(userBasicInfo);
-        assert.equal(userBasicInfo?.name,'코로나행열차')
+        assert.equal(userBasicInfo?.name,'MochaTest')
         assert.hasAllKeys(userBasicInfo,['accessId','level','name'])
      })
      it('올바르지 않은 id로 정보를 조회',async ()=>{

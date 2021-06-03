@@ -4,22 +4,10 @@ import {parser as JSONParse}  from 'stream-json/Parser';
 import {streamArray as JSONArrayStream}  from 'stream-json/streamers/StreamArray';
 import {createReadStream, readdirSync, writeFile} from 'fs';
 import type { Readable } from 'stream';
-import type {MetaDataInfo} from '../../typings/'
+import type {fileMetaData, MetadataID, MetaDataInfo, StreamMetaData} from '../types'
 import * as path from 'path';
 
 const MetaDataDownloadURL = "https://static.api.nexon.co.kr/kart/latest/metadata.zip"
-interface MetadataID{
-type: string,
-hash: string
-}
-interface fileMetaData{
-    type: string,
-    path: string
-}
-interface StreamMetaData{
-    type: string,
-    stream: Readable
-}
 export class KartMetaData {
 public data: any;
 public path: string|undefined;

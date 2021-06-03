@@ -1,15 +1,9 @@
 import got, { Got } from 'got'
 import UserMatchList from './UserMatchList';
 import { StatusCodeErrorHandler } from './NexonError';
-import type {rawMatchDetail, rawUserMatchList } from '../../typings/raw'
+import type {UserBasicInfo ,rawMatchDetail, rawUserMatchList } from '../types'
 import MatchDetail from './MatchDetail';
-import type {KartMetaData} from '../';
-
-export interface UserBasicInfo{
-    accessId: string;
-    name?: string;
-    level?: number;
-}
+import type {KartMetaData} from '../metadata/KartMetaData';
 
 const isOK = (body:any)=> body.status !== 404
 

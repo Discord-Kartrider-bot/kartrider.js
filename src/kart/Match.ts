@@ -1,6 +1,5 @@
-import type { rawMatch } from '../../typings/raw'
-import type { MetaDataInfo } from '../../typings/'
-import type {KartMetaData} from '../';
+import type { rawMatch , MetaDataInfo } from '../types'
+import type {KartMetaData} from '../metadata/KartMetaData';
 export default class Match{
     public id: string;
     public channelName: string;

@@ -1,6 +1,5 @@
-import type { KartMetaData } from '../';
-import type { MetaDataInfo } from '../../typings/'
-import type {rawPlayer} from '../../typings/raw'
+import type { KartMetaData } from '../metadata/KartMetaData';
+import type { rawPlayer ,MetaDataInfo } from '../types'
 export default class Player{
 public id: string;
 public name: string;
