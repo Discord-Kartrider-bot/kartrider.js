@@ -1,11 +1,15 @@
 import type { Readable } from "stream";
+import type Player from "./kart/Player";
 
 export interface UserBasicInfo{
     accessId: string;
     name?: string;
     level?: number;
 }
-
+export interface Teams{
+    teamID : string
+    players: Player[]
+}
 export interface MetaDataInfo{
     id:string;
     name?: string;
