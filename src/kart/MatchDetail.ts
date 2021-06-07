@@ -25,12 +25,11 @@ export default class MatchDetail extends Match{
         this.teams = data.teams.map(data=> {
         const players = data.players.map((playerData)=>new Player(playerData,data.teamId,kartMetaData))
         return {teamID: data.teamId,players}
-        })
-        .sort((a,b)=> Number(a.teamID) - Number(b.teamID))
+        }).sort((a,b)=> Number(a.teamID) - Number(b.teamID))
     }
 
     get isTeam(){
-        return Boolean(this.teams)
+        return Boolean(this.matchResult !== "0")
     }
 
     get winner(){
