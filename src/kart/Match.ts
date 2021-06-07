@@ -20,12 +20,20 @@ export default class Match{
     }
 
 
-    get speedmod(){
+    get gameSpeed(){
         if(this.channelName.includes("Infinit")) return "무한";
         else if(this.channelName.includes("Fastest2Enchant")) return "가장빠름";
         else if(this.channelName.includes("Fastest")) return "매우빠름";
         else if(this.channelName.includes("Fast")) return "빠름";
         return "보통";
+    }
+
+    get isTeam(){
+        return this.channelName.includes('Team');
+    }
+
+    get isSpecialMode(){
+        return this.channelName.includes('_');
     }
 
     get playTime(){
