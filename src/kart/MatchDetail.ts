@@ -35,7 +35,8 @@ export default class MatchDetail extends Match{
     get winner(){
         if(this.matchResult == "0") return this.players?.[0];
         else{
-            return this.teams?.find(team => team.teamID === this.matchResult)
+            const team = this.teams?.find(team => team.teamID === this.matchResult)
+            return team || {teamID:this.matchResult}
         }
     }
     
