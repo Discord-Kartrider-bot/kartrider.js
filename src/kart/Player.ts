@@ -26,7 +26,26 @@ constructor(data: rawPlayer,teamID?: string,kartMetaData?:KartMetaData){
     this._lisenceID = data.rankinggrade2;
     this.matchRetired = Boolean(Number(data.matchRetired));
     this.matchRank = !this.matchRetired ? Number(data.matchRank): null;
+    if(this.matchRank == 99) this.matchRank = null;
     this.teamID = teamID;
 }
+    get lisence(){
+        switch(this._lisenceID){
+            case "1":
+                return "초보"
+            case "2":
+                return "루키"
+            case "3":
+                return "L3"
+            case "4":
+                return "L2"
+            case "5":
+                return "L1"
+            case "6":
+                return "PRO"
+            default:
+                return null
+        }
+    }
 
 }
