@@ -26,4 +26,8 @@ describe('유저정보 조회', () => {
         const userBasicInfo = await kart.getUserBasicInfoByID('169023713096')
         assert.isNull(userBasicInfo);
      })
+     it('매치 정보를 조회',async ()=>{
+      const userBasicInfo = await kart.getUserBasicInfoByID('688112936').then(d=>d ? kart.getUserMatchList(d) : null);
+      console.log(userBasicInfo)
+   })
 })
