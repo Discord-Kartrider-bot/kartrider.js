@@ -14,7 +14,8 @@
     "kartrider"
   ],
   "dependencies": {
-    "got": "^11.0.2",
+    "axios": "^0.21.1",
+    "got": "^11.8.2",
     "stream-json": "^1.7.1",
     "unzipper": "^0.10.11"
   },

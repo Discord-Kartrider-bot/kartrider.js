@@ -1,4 +1,3 @@
-import {HandlerFunction, HTTPError} from 'got'
 
 const NexonHTTPErrorMessage: {[key:number]: string}  = {
 400: 'Bad Request',
@@ -12,20 +11,4 @@ const NexonHTTPErrorMessage: {[key:number]: string}  = {
 504: 'Internal Server Timeout'
 }
 
-const StatusCodeErrorHandler: HandlerFunction = async (options,next) => {
-    try{
-        const response = await next(options);
-        return <any> response;
-    }catch (error) {
-       const {response} = error;
-       const HTTPStatusCode: number = response.statusCode;
-       if(error instanceof HTTPError && HTTPStatusCode >= 400){
-           error.name = 'NexonHTTPError'
-            if(HTTPStatusCode === 404) return response;
-            else error.message = `${NexonHTTPErrorMessage[HTTPStatusCode]} (StatusCode: ${HTTPStatusCode})`
-        }
-        throw error
-    }
-}
-
-export {NexonHTTPErrorMessage,StatusCodeErrorHandler}
+export {NexonHTTPErrorMessage}
