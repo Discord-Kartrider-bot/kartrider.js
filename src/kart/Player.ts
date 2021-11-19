@@ -9,7 +9,7 @@ public pet: MetaDataInfo;
 public flyingPet: MetaDataInfo;
 public matchTime: number;
 public matchWin: boolean;
-public _lisenceID: string;
+public _licenseID: string;
 public matchRetired: boolean;
 public matchRank: number | null;
 public teamID: string | undefined;
@@ -23,14 +23,14 @@ constructor(data: rawPlayer,teamID?: string,kartMetaData?:KartMetaData){
     this.flyingPet = kartMetaData? kartMetaData.getMetaData({type:'flyingPet',hash:data.flyingPet}) : {id:data.flyingPet}
     this.matchTime = Number(data.matchTime);
     this.matchWin = Boolean(Number(data.matchWin));
-    this._lisenceID = data.rankinggrade2;
+    this._licenseID = data.rankinggrade2;
     this.matchRetired = Boolean(Number(data.matchRetired));
     this.matchRank = !this.matchRetired ? Number(data.matchRank): null;
     if(this.matchRank == 99) this.matchRank = null;
     this.teamID = teamID;
 }
-    get lisence(){
-        switch(this._lisenceID){
+    get license(){
+        switch(this._licenseID){
             case "1":
                 return "초보"
             case "2":
