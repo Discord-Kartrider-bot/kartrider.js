@@ -17,7 +17,7 @@ const StatusCodeErrorHandler: HandlerFunction = async (options,next) => {
         const response = await next(options);
         return <any> response;
     }catch (error) {
-       const {response} = error;
+       const {response} = error as HTTPError;
        const HTTPStatusCode: number = response.statusCode;
        if(error instanceof HTTPError && HTTPStatusCode >= 400){
            error.name = 'NexonHTTPError'
