@@ -1,6 +1,7 @@
-import type { KartMetaData } from '../metadata/KartMetaData';
-import type { rawPlayer ,MetaDataInfo } from '../types'
-export default class Player{
+import type { Client } from './Client';
+import type { rawPlayer } from './types'
+import type { MetaDataInfo } from './MetaData';
+export class Player{
 public id: string;
 public name: string;
 public character: MetaDataInfo;
@@ -14,20 +15,21 @@ public matchRetired: boolean;
 public matchRank: number | null;
 public teamID: string | undefined;
 
-constructor(data: rawPlayer,teamID?: string,kartMetaData?:KartMetaData){
+constructor(client: Client, data: rawPlayer,teamID?: string){
+    const hasMetaData = "metadata" in client;
     this.id = data.accountNo;
     this.name = data.characterName;
-    this.character = kartMetaData? kartMetaData.getMetaData({type:'character',hash:data.character}) : {id:data.character}
-    this.kart = kartMetaData? kartMetaData.getMetaData({type:'kart',hash:data.kart}) : {id:data.kart}
-    this.pet = kartMetaData? kartMetaData.getMetaData({type:'pet',hash:data.pet}) : {id:data.pet}
-    this.flyingPet = kartMetaData? kartMetaData.getMetaData({type:'flyingPet',hash:data.flyingPet}) : {id:data.flyingPet}
+    this.character = hasMetaData ? client.metadata!.getMetaData({type:'character',hash:data.character}) : {id:data.character}
+    this.kart = hasMetaData ? client.metadata!.getMetaData({type:'kart',hash:data.kart}) : {id:data.kart}
+    this.pet = hasMetaData ? client.metadata!.getMetaData({type:'pet',hash:data.pet}) : {id:data.pet}
+    this.flyingPet = hasMetaData ? client.metadata!.getMetaData({type:'flyingPet',hash:data.flyingPet}) : {id:data.flyingPet}
     this.matchTime = Number(data.matchTime);
     this.matchWin = Boolean(Number(data.matchWin));
     this._licenseID = data.rankinggrade2;
     this.matchRetired = Boolean(Number(data.matchRetired));
     this.matchRank = !this.matchRetired ? Number(data.matchRank): null;
     if(this.matchRank == 99) this.matchRank = null;
-    this.teamID = teamID;
+    this.teamID = teamID || "0";
 }
     get license(){
         switch(this._licenseID){

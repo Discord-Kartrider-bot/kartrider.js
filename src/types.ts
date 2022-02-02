@@ -1,7 +1,6 @@
-import type { Readable } from "stream";
-import type Player from "./kart/Player";
+import type { Player } from "./Player";
 
-export interface UserBasicInfo{
+export interface PlayerBasicInfo{
     accessId: string;
     name?: string;
     level?: number;
@@ -10,23 +9,6 @@ export interface Teams{
     teamID : string
     players: Player[]
 }
-export interface MetaDataInfo{
-    id:string;
-    name?: string;
-}
-
-export interface MetadataID{
-    type: string,
-    hash: string
-    }
-export interface fileMetaData{
-        type: string,
-        path: string
-    }
-export interface StreamMetaData{
-        type: string,
-        stream: Readable
-    }
 export interface rawUserMatchList{
         nickName: string;
         matches: rawMatchTypeMatches[];

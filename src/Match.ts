@@ -1,6 +1,7 @@
-import type { rawMatch , MetaDataInfo } from '../types'
-import type {KartMetaData} from '../metadata/KartMetaData';
-export default class Match{
+import type { rawMatch } from './types'
+import type { MetaDataInfo } from './MetaData';
+import type {Client} from './Client';
+export class Match{
     public id: string;
     public channelName: string;
     public matchType: MetaDataInfo;
@@ -9,10 +10,11 @@ export default class Match{
     public endTime: Date
     public matchResult: string;
 
-    constructor(data: rawMatch,kartMetaData?:KartMetaData){
-    this.matchType = kartMetaData? kartMetaData.getMetaData({type:'gameType',hash:data.matchType}) : {id:data.matchType}
+    constructor(client:Client,data: rawMatch){
+    const hasMetaData = "metadata" in client;
+    this.matchType =  hasMetaData ? client.metadata!.getMetaData({type:'gameType',hash:data.matchType}) : {id:data.matchType}
     this.channelName = data.channelName;
-    this.track = kartMetaData? kartMetaData.getMetaData({type:'track',hash:data.trackId}) : {id:data.trackId}
+    this.track = hasMetaData ? client.metadata!.getMetaData({type:'track',hash:data.trackId}) : {id:data.trackId}
     this.matchResult = data.matchResult;
     this.startTime = new Date(data.startTime+"Z");
     this.endTime = new Date(data.endTime+"Z");

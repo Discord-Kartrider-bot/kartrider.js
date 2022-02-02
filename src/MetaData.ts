@@ -1,14 +1,31 @@
+import type { Readable } from 'stream';
 import got from 'got'
 import {Parse as parseZip} from 'unzipper'
 import {parser as JSONParse}  from 'stream-json/Parser';
 import {streamArray as JSONArrayStream}  from 'stream-json/streamers/StreamArray';
 import {createReadStream, readdirSync, writeFile} from 'fs';
-import type { Readable } from 'stream';
-import type {fileMetaData, MetadataID, MetaDataInfo, StreamMetaData} from '../types'
 import * as path from 'path';
 
-const MetaDataDownloadURL = "https://static.api.nexon.co.kr/kart/latest/metadata.zip"
-export class KartMetaData {
+export interface MetaDataInfo{
+    id:string;
+    name?: string;
+}
+
+interface MetadataID{
+    type: string,
+    hash: string
+    }
+interface MetaDatafile{
+        type: string,
+        path: string
+    }
+interface StreamMetaData{
+        type: string,
+        stream: Readable
+    }
+
+const URL = "https://static.api.nexon.co.kr/kart/latest/metadata.zip"
+export class MetaData {
 public data: any;
 public path: string|undefined;
 
@@ -17,7 +34,7 @@ constructor() {
 }
 
 static async init(folderPath?:string){
-const kartMetaData = new KartMetaData();
+const kartMetaData = new MetaData();
 if(folderPath){
     kartMetaData.path = folderPath;
     const jsonFiles = readdirSync(folderPath)
@@ -38,7 +55,7 @@ return kartMetaData;
 }
 
 static getRecentDataInfo(){
-    return got.head(MetaDataDownloadURL).then(res=>{
+    return got.head(URL).then(res=>{
         const sha256 = res.headers["x-amz-meta-sha256"];
         const modifiedDateFromS3 = res.headers["x-amz-meta-s3b-last-modified"];
         const modifiedDate = res.headers["last-modified"];
@@ -58,7 +75,7 @@ isExist(id :MetadataID){
 }
 
 fetch(){
-return got.stream(MetaDataDownloadURL).pipe(parseZip())
+return got.stream(URL).pipe(parseZip())
     .on('entry', async (entry)=> {
         if(!entry.path.endsWith('.json')){entry.autodrain(); return;}
         const type = entry.path.split('.')[0];
@@ -67,7 +84,7 @@ return got.stream(MetaDataDownloadURL).pipe(parseZip())
     }).promise();
 }
 
-async appendJSONfile(file:fileMetaData) {
+async appendJSONfile(file:MetaDatafile) {
     const stream = createReadStream(file.path);
     return _makeMapFromJSONFileStream(stream)
         .then(map => this._updateDataMap(file.type,map));

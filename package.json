@@ -1,7 +1,7 @@
 {
   "name": "kartrider.js",
-  "version": "0.0.7",
-  "description": "KartRider library interacting with Nexon API",
+  "version": "0.0.10",
+  "description": "KartRider Nexon API Node.js library",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "author": "MoartMedia <u.hello@kakao.com>",
@@ -14,7 +14,6 @@
     "kartrider"
   ],
   "dependencies": {
-    "cross-fetch": "^3.1.4",
     "got": "^11.0.2",
     "stream-json": "^1.7.1",
     "unzipper": "^0.10.11"

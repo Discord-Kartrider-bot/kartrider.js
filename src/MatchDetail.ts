@@ -1,21 +1,21 @@
-import type { KartMetaData } from '../metadata/KartMetaData';
-import Player from './Player';
-import type { Teams, rawMatchDetail } from '../types'
-import Match from './Match';
+import type { Client } from './Client';
+import { Player } from './Player';
+import type { Teams, rawMatchDetail } from './types'
+import { Match } from './Match';
 
-export default class MatchDetail extends Match{
+export class MatchDetail extends Match{
     private _playTime: number;
     public _gameSpeed: number;
     public teams: Teams[] | undefined;
     public players: Player[] | undefined;
 
-    constructor(data: rawMatchDetail, kartMetaData?:KartMetaData){
-    super(data,kartMetaData);
+    constructor(client: Client,data: rawMatchDetail){
+    super(client,data);
     this._playTime = data.playTime;
     this._gameSpeed = data.gameSpeed;
     if(data.players) 
         this.players = data.players
-        .map(data=> new Player(data,"0",kartMetaData))
+        .map(data=> new Player(client,data))
             .sort((a,b)=>{
                 const ARank = a.matchRank || 99
                 const BRank = b.matchRank || 99
@@ -23,7 +23,7 @@ export default class MatchDetail extends Match{
             })
     if(data.teams)
         this.teams = data.teams.map(data=> {
-        const players = data.players.map((playerData)=>new Player(playerData,data.teamId,kartMetaData))
+        const players = data.players.map((playerData)=>new Player(client,playerData,data.teamId))
         return {teamID: data.teamId,players}
         }).sort((a,b)=> Number(a.teamID) - Number(b.teamID))
     }

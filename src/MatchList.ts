@@ -1,17 +1,16 @@
+import {MatchInfo} from './MatchInfo'; 
+import type {Client} from './Client';
+import type { PlayerBasicInfo, rawMatchTypeMatches, rawUserMatchInfo, rawUserMatchList } from './types'
 
-import UserMatchInfo from './UserMatchInfo'; 
-import type { UserBasicInfo, rawMatchTypeMatches, rawUserMatchInfo, rawUserMatchList } from '../types'
-import type { KartMetaData } from '../metadata/KartMetaData';
-
-export default class UserMatchList{
-    public user: UserBasicInfo;
-    public matchList: UserMatchInfo[];
+export class MatchList{
+    public user: PlayerBasicInfo;
+    public matchList: MatchInfo[];
     public limit: number | undefined | null;
     public offset: number | undefined | null;
-    constructor(userInfo:UserBasicInfo, data: rawUserMatchList, page?:{limit:number,offset:number},kartMetaData?:KartMetaData){
+    constructor(client: Client,userInfo:PlayerBasicInfo, data: rawUserMatchList, page?:{limit:number,offset:number}){
         this.user = userInfo;
         if(!this.user.name) this.user.name = data.nickName;
-        this.matchList = resolveMatchList(data.matches,kartMetaData);
+        this.matchList = resolveMatchList(client,data.matches);
         this.limit = page?.limit;
         this.offset = page?.offset;
     }
@@ -27,8 +26,8 @@ function _SortDatefromMatchList(data: rawUserMatchInfo[]){
     return data.sort((a,b)=>Date.parse(b.endTime)-Date.parse(a.endTime));
 }
 
-function resolveMatchList(raw: rawMatchTypeMatches[],kartMetaData?:KartMetaData){
+function resolveMatchList(client: Client, raw: rawMatchTypeMatches[]){
     const marge = _MargeTypefromMatchObject(raw);
     const sort = _SortDatefromMatchList(marge);
-    return sort.map(MatchData => new UserMatchInfo(MatchData,kartMetaData));
+    return sort.map(MatchData => new MatchInfo(client,MatchData));
 }
