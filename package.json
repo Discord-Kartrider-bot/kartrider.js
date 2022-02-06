@@ -1,9 +1,9 @@
 {
   "name": "kartrider.js",
-  "version": "0.0.10",
+  "version": "0.1.5",
   "description": "KartRider Nexon API Node.js library",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "author": "MoartMedia <u.hello@kakao.com>",
   "license": "MIT",
   "keywords": [
@@ -12,6 +12,9 @@
     "kart",
     "nexon.com",
     "kartrider"
+  ],
+  "files": [
+    "dist"
   ],
   "dependencies": {
     "got": "^11.0.2",

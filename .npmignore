@@ -1,8 +1,0 @@
-test/
-node_modules/
-reference/
-README.md
-.gitignore
-.mocharc.json
-yarn*
-src/
