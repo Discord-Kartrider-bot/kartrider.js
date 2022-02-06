@@ -4,4 +4,5 @@ export {MatchInfo} from './MatchInfo'
 export {MatchList} from './MatchList'
 export {Match} from './Match'
 export {MatchDetail} from './MatchDetail'
-export {MetaData,MetaDataInfo} from "./MetaData"
+export {MetaData,MetaDataInfo} from './MetaData'
+export * from './types'
