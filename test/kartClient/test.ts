@@ -1,10 +1,10 @@
-import {KartClient} from '../../src/'
+import {Client} from '../../src/'
 import {token} from '../auth.json'
 import { assert } from 'chai';
 describe('유저정보 조회', () => {
-    let kart: KartClient;
+    let kart: Client;
     before(()=>{
-        kart = new KartClient(token)
+        kart = new Client(token)
     })
     it('올바른 닉네임으로 정보 조회',async ()=>{
        const userBasicInfo = await kart.getUserBasicInfoByName('MochaTest')
