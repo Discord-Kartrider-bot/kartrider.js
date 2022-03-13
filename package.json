@@ -1,6 +1,6 @@
 {
   "name": "kartrider.js",
-  "version": "0.1.6",
+  "version": "0.2.0",
   "description": "KartRider Nexon API Node.js library",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
